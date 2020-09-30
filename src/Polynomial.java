@@ -1,8 +1,12 @@
+import java.util.Arrays;
+import java.util.Collections;
+
 public class Polynomial {
 
     private Monomial[] monomials;
 
     public Polynomial(Monomial... monomials) {
+        Arrays.sort(monomials, Collections.reverseOrder());
         this.monomials = monomials;
     }
 
@@ -12,6 +16,10 @@ public class Polynomial {
 
     public void setMonomials(Monomial[] monomials) {
         this.monomials = monomials;
+    }
+
+    public Monomial getLeadingTerm() {
+        return monomials[0];
     }
 
     @Override
