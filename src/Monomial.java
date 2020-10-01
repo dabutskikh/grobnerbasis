@@ -1,5 +1,13 @@
 public class Monomial implements Comparable<Monomial> {
 
+    public static Monomial getGcd(Monomial m1, Monomial m2) {
+        int[] gcdDegrees = new int[m1.getDegrees().length];
+        for (int i = 0; i < gcdDegrees.length; i++) {
+            gcdDegrees[i] = Math.min(m1.degrees[i], m2.degrees[i]);
+        }
+        return new Monomial(1, gcdDegrees);
+    }
+
     public static boolean isDivided(Monomial divident, Monomial divider) {
         for (int i = 0; i < divident.getDegrees().length; i++) {
             if (divident.getDegrees()[i] - divider.getDegrees()[i] < 0) {
