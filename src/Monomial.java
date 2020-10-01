@@ -1,5 +1,23 @@
 public class Monomial implements Comparable<Monomial> {
 
+    public static boolean isDivided(Monomial divident, Monomial divider) {
+        for (int i = 0; i < divident.getDegrees().length; i++) {
+            if (divident.getDegrees()[i] - divider.getDegrees()[i] < 0) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public static Monomial div(Monomial divident, Monomial divider) {
+        double coeff = divident.getCoeff() / divider.getCoeff();
+        int[] degrees = new int[divident.getDegrees().length];
+        for (int i = 0; i < degrees.length; i++) {
+            degrees[i] = divident.getDegrees()[i] - divider.getDegrees()[i];
+        }
+        return new Monomial(coeff, degrees);
+    }
+
     private double coeff;
     private int[] degrees;
 
