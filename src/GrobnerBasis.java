@@ -4,6 +4,23 @@ public class GrobnerBasis {
         return Polynomial.sub(h, Polynomial.mul(q, f));
     }
 
+    public static Polynomial getNewBasisPolynomial(Polynomial h, Polynomial[] basis) {
+        Monomial ltH = h.getLeadingTerm();
+        for (Polynomial f : basis) {
+            Monomial ltF = f.getLeadingTerm();
+            if (Monomial.isDivided(ltH, ltF)) {
+                Polynomial q = new Polynomial(Monomial.div(ltH, ltF));
+                Polynomial h1 = reduce(h, f, q);
+                if (h1.getMonomials().size() == 0) {
+                    return null;
+                } else {
+                    return getNewBasisPolynomial(h1, basis);
+                }
+            }
+        }
+        return h;
+    }
+
     public static boolean isBelongsBasis(Polynomial h, Polynomial[] basis) {
         Monomial ltH = h.getLeadingTerm();
         for (Polynomial f : basis) {
@@ -11,6 +28,7 @@ public class GrobnerBasis {
             if (Monomial.isDivided(ltH, ltF)) {
                 Polynomial q = new Polynomial(Monomial.div(ltH, ltF));
                 Polynomial h1 = reduce(h, f, q);
+                System.out.println(h1);
                 if (h1.getMonomials().size() == 0) {
                     return true;
                 } else {
