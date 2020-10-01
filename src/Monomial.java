@@ -1,5 +1,14 @@
 public class Monomial implements Comparable<Monomial> {
 
+    public static boolean isZeroDegree(Monomial m) {
+        for (int degree : m.getDegrees()) {
+            if (degree != 0) {
+                return false;
+            }
+        }
+        return true;
+    }
+
     public static Monomial getGcd(Monomial m1, Monomial m2) {
         int[] gcdDegrees = new int[m1.getDegrees().length];
         for (int i = 0; i < gcdDegrees.length; i++) {
